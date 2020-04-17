@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>WeiXinProject.Application</AssemblyName>
+    <PackageId>WeiXinProject.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>WeiXinProject</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeiXinProject.Core\WeiXinProject.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WeiXin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Senparc.Weixin.Work" Version="3.7.304" />
+  </ItemGroup>
+</Project>
