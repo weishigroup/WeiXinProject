@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 
@@ -114,5 +115,4 @@ namespace WeiXinProject.Authorization.Users
         [Display(Name = "Memo")]
         public string Memo { get; set; }
     }
-}
 }
