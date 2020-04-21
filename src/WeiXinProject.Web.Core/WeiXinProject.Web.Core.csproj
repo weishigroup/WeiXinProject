@@ -29,4 +29,7 @@
     <PackageReference Include="Abp.ZeroCore" Version="5.2.0" />
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.2.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\WeChat\" />
+  </ItemGroup>
 </Project>

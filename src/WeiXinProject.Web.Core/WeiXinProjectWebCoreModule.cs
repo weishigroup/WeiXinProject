@@ -14,6 +14,7 @@ using WeiXinProject.Configuration;
 using WeiXinProject.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using WeiXinProject.WxSdk;
+using WeiXinProject.Authentication.External;
 
 namespace WeiXinProject
 {
@@ -53,6 +54,7 @@ namespace WeiXinProject
                      typeof(WeiXinProjectWxSdkModule).GetAssembly()
                  );
             ConfigureTokenAuth();
+            ConfigureExternalAuthProviders();
         }
 
         private void ConfigureTokenAuth()
@@ -67,6 +69,24 @@ namespace WeiXinProject
             tokenAuthConfig.Expiration = TimeSpan.FromDays(1);
         }
 
+        public void ConfigureExternalAuthProviders()
+        {
+            IocManager.Register<ExternalLoginProviderInfo>();
+            IocManager.Register<IExternalAuthConfiguration, ExternalAuthConfiguration>();
+            var externalAuthConfiguration = IocManager.Resolve<ExternalAuthConfiguration>();
+            if (bool.Parse(_appConfiguration["Authentication:EnterpriseWechat:IsEnabled"]))
+            {
+                externalAuthConfiguration.Providers.Add(
+                    new ExternalLoginProviderInfo(
+                       WechatAuthProviderApi.ProviderName,
+                       _appConfiguration["Authentication:EnterpriseWechat:AppId"],
+                       _appConfiguration["Authentication:EnterpriseWechat:Secret"],
+                       typeof(WechatAuthProviderApi)
+                    )
+                );
+            }
+        }
+        //初始化模块
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(WeiXinProjectWebCoreModule).GetAssembly());
